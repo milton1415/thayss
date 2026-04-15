@@ -218,8 +218,14 @@
     </div>
   </section>
 
-  <section class="fade-section"><h2>🎧 Audio oculto</h2>
-    <div class="audio-player"><button id="customPlayBtn" class="play-btn"><i class="fas fa-play"></i></button><span>Si llegaste hasta aquí… escúchame 💕</span><span id="audioStatus">🎵 listo</span></div>
+  <!-- AUDIO OCULTO (ahora con teamo.mp3) -->
+  <section class="fade-section">
+    <h2>🎧 Audio oculto</h2>
+    <div class="audio-player">
+      <button id="customPlayBtn" class="play-btn"><i class="fas fa-play"></i></button>
+      <span>Si llegaste hasta aquí… escúchame 💕</span>
+      <span id="audioStatus">🎵 listo</span>
+    </div>
   </section>
 
   <section id="timeline" class="fade-section"><h2>⏳ Nuestra línea de tiempo</h2><div class="timeline-alt" id="timelineAlt"></div></section>
@@ -322,7 +328,6 @@
     document.body.addEventListener('click', (e) => {
       const img = e.target.closest('img');
       if (!img) return;
-      // Solo imágenes de carruseles o lugares
       if (img.closest('.carousel-item') || img.closest('.favorite-card')) {
         openLightbox(img.src);
       }
@@ -461,37 +466,43 @@
       });
     });
 
-    // Audio y música (sin cambios)
-    let audioCtx = null, isPlaying = false;
-    const playBtn = document.getElementById('customPlayBtn'), statusSpan = document.getElementById('audioStatus');
-    function playGentleMelody(ctx) {
-      const now = ctx.currentTime;
-      [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
-        let osc = ctx.createOscillator(); let gain = ctx.createGain();
-        osc.type = 'sine'; osc.frequency.value = freq;
-        gain.gain.setValueAtTime(0.08, now + i*0.5);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + i*0.5 + 1.2);
-        osc.connect(gain).connect(ctx.destination);
-        osc.start(now + i*0.6); osc.stop(now + i*0.6 + 1.5);
-      });
-      setTimeout(() => {
-        if (audioCtx && isPlaying) playGentleMelody(audioCtx);
-        else { isPlaying = false; playBtn.innerHTML = '<i class="fas fa-play"></i>'; statusSpan.textContent = '🎵 listo'; }
-      }, 4000);
-    }
-    playBtn.addEventListener('click', async () => {
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      if (audioCtx.state === 'suspended') await audioCtx.resume();
+    // ----- AUDIO OCULTO (teamo.mp3) -----
+    const audioOculto = new Audio('teamo.mp3'); // ⬅️ Archivo en la misma carpeta
+    audioOculto.loop = false;
+
+    let isPlaying = false;
+    const playBtn = document.getElementById('customPlayBtn');
+    const statusSpan = document.getElementById('audioStatus');
+
+    playBtn.addEventListener('click', () => {
       if (!isPlaying) {
-        isPlaying = true; playBtn.innerHTML = '<i class="fas fa-pause"></i>'; statusSpan.textContent = '🎶 reproduciendo...';
-        playGentleMelody(audioCtx);
+        audioOculto.play().catch(e => {
+          statusSpan.textContent = '⚠️ no se pudo reproducir';
+        });
+        playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        statusSpan.textContent = '🎶 reproduciendo...';
+        isPlaying = true;
       } else {
-        await audioCtx.close(); audioCtx = null; isPlaying = false;
-        playBtn.innerHTML = '<i class="fas fa-play"></i>'; statusSpan.textContent = '🎵 detenido';
+        audioOculto.pause();
+        playBtn.innerHTML = '<i class="fas fa-play"></i>';
+        statusSpan.textContent = '🎵 pausado';
+        isPlaying = false;
       }
     });
 
-    const musicaFondo = new Audio('musica/fondo-romantico.mp3'); musicaFondo.loop = true;
+    audioOculto.addEventListener('ended', () => {
+      playBtn.innerHTML = '<i class="fas fa-play"></i>';
+      statusSpan.textContent = '🎵 finalizado';
+      isPlaying = false;
+    });
+
+    audioOculto.addEventListener('error', () => {
+      statusSpan.textContent = '❌ error al cargar el audio';
+    });
+
+    // Música de fondo (sin cambios)
+    const musicaFondo = new Audio('musica/fondo-romantico.mp3');
+    musicaFondo.loop = true;
     let fondoPlaying = false;
     document.getElementById('musicToggle').addEventListener('click', () => {
       if (!fondoPlaying) {
