@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>🌹 Nuestro refugio · Cristhian & Thayss.</title>
   <!-- Favicon corazón -->
- <link rel="icon" type="image/svg+xml" 
-href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23ff69b4' d='M50 85 L15 50 Q0 35 0 20 Q0 5 15 5 Q30 5 50 25 Q70 5 85 5 Q100 5 100 20 Q100 35 85 50 Z'/%3E%3C/svg%3E?v=2">
+  <link rel="icon" type="image/svg+xml" 
+  href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23ff69b4' d='M50 85 L15 50 Q0 35 0 20 Q0 5 15 5 Q30 5 50 25 Q70 5 85 5 Q100 5 100 20 Q100 35 85 50 Z'/%3E%3Csvg%3E?v=2">
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -95,6 +95,18 @@ href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 
     .yt-player { margin-top: 10px; }
     iframe { width: 100%; aspect-ratio: 16/9; border-radius: 20px; border: none; }
 
+    /* Estilos para los sobres de cartas */
+    .envelope {
+      background: #ffe4ec; padding: 1.5rem; border-radius: 20px; cursor: pointer;
+      border: 2px solid #ffb6c1; width: 220px; text-align: center;
+    }
+    .envelope i { font-size: 2.5rem; color: #c95f8b; }
+    .letter-content {
+      max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
+      margin-top: 10px; font-style: italic; color: #5e3a48;
+    }
+    .envelope.open .letter-content { max-height: 200px; }
+
     /* Timeline alternada */
     .timeline-alt { position: relative; max-width: 900px; margin: 40px auto; }
     .timeline-alt::after { content: ''; position: absolute; width: 3px; background: #ff69b4; top: 0; bottom: 0; left: 50%; transform: translateX(-50%); }
@@ -177,9 +189,9 @@ href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 
 
   <section id="cartas" class="fade-section"><h2>💌 Cartas que nunca te envié</h2>
     <div class="letters-container" style="display:flex; gap:20px; flex-wrap:wrap; justify-content:center;">
-      <div class="envelope" style="background:#ffe4ec; padding:1.5rem; border-radius:20px; cursor:pointer;" onclick="this.classList.toggle('open')"><i class="fas fa-envelope-open-text"></i><div class="letter-content">“A veces escribo lo que no digo… Te amo en silencio, pero infinito.”</div></div>
-      <div class="envelope" style="background:#ffe4ec; padding:1.5rem; border-radius:20px; cursor:pointer;" onclick="this.classList.toggle('open')"><i class="fas fa-envelope-open-text"></i><div class="letter-content">“Hoy soñé que estabas aquí y no quería despertar.”</div></div>
-      <div class="envelope" style="background:#ffe4ec; padding:1.5rem; border-radius:20px; cursor:pointer;" onclick="this.classList.toggle('open')"><i class="fas fa-envelope-open-text"></i><div class="letter-content">“Cada kilómetro duele, pero vale la pena porque eres tú.”</div></div>
+      <div class="envelope" onclick="this.classList.toggle('open')"><i class="fas fa-envelope-open-text"></i><div class="letter-content">“A veces escribo lo que no digo… Te amo en silencio, pero infinito.”</div></div>
+      <div class="envelope" onclick="this.classList.toggle('open')"><i class="fas fa-envelope-open-text"></i><div class="letter-content">“Hoy soñé que estabas aquí y no quería despertar.”</div></div>
+      <div class="envelope" onclick="this.classList.toggle('open')"><i class="fas fa-envelope-open-text"></i><div class="letter-content">“Cada kilómetro duele, pero vale la pena porque eres tú.”</div></div>
     </div>
   </section>
 
@@ -237,201 +249,54 @@ href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 
     const heartsC = document.getElementById('heartsContainer');
     for(let i=0;i<22;i++){ let h=document.createElement('div'); h.className='heart-float'; h.innerHTML=['❤️','🌸','✨','💕'][i%4]; h.style.left=Math.random()*100+'%'; h.style.animationDelay=Math.random()*10+'s'; heartsC.appendChild(h); }
 
+    // FOTOS (tus arrays personalizados)
+    const imagenes = {
+      'Fotos Especiales': [
+        'images/e6.png', 'images/e1.jpg', 'images/e2.jpg', 'images/e3.jpg', 'images/e4.jpg', 'images/e5.jpg', 'images/e6.jpeg', 'images/e7.jpeg', 'images/e8.jpeg', 'images/e9.jpeg', 'images/e10.jpeg', 'images/e11.jpeg', 'images/e12.jpeg', 'images/e13.jpeg', 'images/e14.jpeg',
+      ],
+      'Mordidas': [
+        'images/m1.jpeg', 'images/m2.jpeg', 'images/m3.jpeg', 'images/m4.jpeg',
+      ],
+      'Citas': [
+        'images/c1.jpeg', 'images/c2.jpeg', 'images/c3.jpeg', 'images/c4.jpeg', 'images/c5.jpeg', 'images/c6.jpeg', 'images/c7.jpeg', 'images/c8.jpeg', 'images/c9.jpeg', 'images/c10.jpeg', 'images/c11.jpeg', 'images/c12.jpeg', 'images/c13.jpeg', 'images/c14.jpeg', 'images/c15.jpeg', 'images/c16.jpeg', 'images/c17.jpeg', 'images/c18.jpeg', 'images/c19.jpeg', 'images/c20.jpeg', 'images/c21.jpeg', 'images/c22.jpeg', 'images/c23.jpeg', 'images/c24.jpeg', 'images/c25.jpeg', 'images/c26.jpeg', 'images/c27.jpeg', 'images/c28.jpeg', 'images/c29.jpeg', 'images/c30.jpeg', 'images/c31.jpeg', 'images/c32.jpeg', 'images/c33.jpeg', 'images/c34.jpeg', 'images/c35.jpeg', 'images/c36.jpeg', 'images/c37.jpeg', 'images/c38.jpeg', 'images/c39.jpeg', 'images/c40.jpeg', 'images/c41.jpeg', 'images/c42.jpeg', 'images/c43.jpeg', 'images/c44.jpeg', 'images/c45.jpeg', 'images/c46.jpeg', 'images/c47.jpeg', 'images/c48.jpeg', 'images/c49.jpeg', 'images/c50.jpeg',
+      ],
+      'Gym': [
+        'images/g1.jpeg', 'images/g2.jpeg', 'images/g3.jpeg', 'images/g4.jpeg',
+      ],
+      'Nuestro amor contra todo': [
+        'images/d1.jpeg', 'images/d2.jpeg', 'images/d3.jpeg', 'images/d4.jpeg', 'images/d5.jpeg', 'images/d6.jpeg', 'images/d7.jpeg', 'images/d8.jpeg', 'images/d9.jpeg', 'images/d10.jpeg', 'images/d11.jpeg', 'images/d12.jpeg', 'images/d13.jpeg', 'images/d14.jpeg', 'images/d15.jpeg', 'images/d16.jpeg', 'images/d17.jpeg', 'images/d18.jpeg', 'images/d19.jpeg', 'images/d20.jpeg', 'images/d21.jpeg', 'images/d22.jpeg',
+      ]
+    };
 
-//FOTOS
-
-const imagenes = {
-  'Fotos Especiales': [
-    'images/e6.png',
-    'images/e1.jpg',
-    'images/e2.jpg',
-    'images/e3.jpg',
-    'images/e4.jpg',
-    'images/e5.jpg',
-    'images/e6.jpeg',
-    'images/e7.jpeg',
-    'images/e8.jpeg',
-    'images/e9.jpeg',
-    'images/e10.jpeg',
-    'images/e11.jpeg',
-    'images/e12.jpeg',
-     'images/e13.jpeg',
-    'images/e14.jpeg',
-    // agrega las que quieras
-  ],
-  'Mordidas': [
-    'images/m1.jpeg',
-'images/m2.jpeg',
-'images/m3.jpeg',
-'images/m4.jpeg',
-  ],
-  'Citas': [
-    'images/c1.jpeg',
-'images/c2.jpeg',
-'images/c3.jpeg',
-'images/c4.jpeg',
-'images/c5.jpeg',
-'images/c6.jpeg',
-'images/c7.jpeg',
-'images/c8.jpeg',
-'images/c9.jpeg',
-'images/c10.jpeg',
-'images/c11.jpeg',
-'images/c12.jpeg',
-'images/c13.jpeg',
-'images/c14.jpeg',
-'images/c15.jpeg',
-'images/c16.jpeg',
-'images/c17.jpeg',
-'images/c18.jpeg',
-'images/c19.jpeg',
-'images/c20.jpeg',
-'images/c21.jpeg',
-'images/c22.jpeg',
-'images/c23.jpeg',
-'images/c24.jpeg',
-'images/c25.jpeg',
-'images/c26.jpeg',
-'images/c27.jpeg',
-'images/c28.jpeg',
-'images/c29.jpeg',
-'images/c30.jpeg',
-'images/c31.jpeg',
-'images/c32.jpeg',
-'images/c33.jpeg',
-'images/c34.jpeg',
-'images/c35.jpeg',
-'images/c36.jpeg',
-'images/c37.jpeg',
-'images/c38.jpeg',
-'images/c39.jpeg',
-'images/c40.jpeg',
-'images/c41.jpeg',
-'images/c42.jpeg',
-'images/c43.jpeg',
-'images/c44.jpeg',
-'images/c45.jpeg',
-'images/c46.jpeg',
-'images/c47.jpeg',
-'images/c48.jpeg',
-'images/c49.jpeg',
-'images/c50.jpeg',
-  ],
-
-    'Gym': [
-    'images/g1.jpeg',
-'images/g2.jpeg',
-'images/g3.jpeg',
-'images/g4.jpeg',
-      'images/g3.jpeg',
-  ],
-
-'Nuestro amor contra todo': [
-'images/d1.jpeg',
-'images/d2.jpeg',
-'images/d3.jpeg',
-'images/d4.jpeg',
-'images/d5.jpeg',
-'images/d6.jpeg',
-'images/d7.jpeg',
-'images/d8.jpeg',
-'images/d9.jpeg',
-'images/d10.jpeg',
-'images/d11.jpeg',
-'images/d12.jpeg',
-'images/d13.jpeg',
-'images/d14.jpeg',
-'images/d15.jpeg',
-'images/d16.jpeg',
-'images/d17.jpeg',
-'images/d18.jpeg',
-'images/d19.jpeg',
-'images/d20.jpeg',
-'images/d21.jpeg',
-'images/d22.jpeg',
-  ],
-
-
-
-
-
-
-
-  
-  // sigue con los demás temas...
-};
-
-const carouselsDiv = document.getElementById('photoCarousels');
-
-Object.keys(imagenes).forEach(tema => {
-  const sec = document.createElement('div');
-  sec.className = 'carousel-section';
-
-  sec.innerHTML = `
-    <div class="carousel-title">
-      <i class="fas fa-heart" style="color:#ff69b4;"></i> ${tema}
-    </div>
-  `;
-
-  const cont = document.createElement('div');
-  cont.className = 'carousel-container';
-
-  imagenes[tema].forEach(src => {
-    const item = document.createElement('div');
-    item.className = 'carousel-item';
-
-    const img = document.createElement('img');
-    img.src = src;
-    img.alt = tema;
-
-    img.addEventListener('click', () => {
-      lightbox.style.display='flex';
-      lightboxImg.src = img.src;
+    const carouselsDiv = document.getElementById('photoCarousels');
+    Object.keys(imagenes).forEach(tema => {
+      const sec = document.createElement('div'); sec.className = 'carousel-section';
+      sec.innerHTML = `<div class="carousel-title"><i class="fas fa-heart" style="color:#ff69b4;"></i> ${tema}</div>`;
+      const cont = document.createElement('div'); cont.className = 'carousel-container';
+      imagenes[tema].forEach(src => {
+        const item = document.createElement('div'); item.className = 'carousel-item';
+        const img = document.createElement('img'); img.src = src; img.alt = tema;
+        img.addEventListener('click', () => { lightbox.style.display='flex'; lightboxImg.src = img.src; });
+        item.appendChild(img); cont.appendChild(item);
+      });
+      sec.appendChild(cont); carouselsDiv.appendChild(sec);
     });
-
-    item.appendChild(img);
-    cont.appendChild(item);
-  });
-
-  sec.appendChild(cont);
-  carouselsDiv.appendChild(sec);
-});
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-    
 
     // Lightbox
     const lightbox = document.getElementById('lightbox'), lightboxImg = document.getElementById('lightboxImg');
     document.getElementById('lightboxClose').onclick = () => lightbox.style.display='none';
     lightbox.onclick = e => { if(e.target===lightbox) lightbox.style.display='none'; };
 
-    // Videos locales desde carpeta videos/
+    // Videos locales
     const videosGrid = document.getElementById('videosGrid');
-    const videoFiles = ['recuerdo1.mp4','mensaje.mp4','viaje.mp4'];
+    const videoFiles = ['recuerdo1.mp4','mensaje.mp4','viaje.mp4']; // Puedes cambiarlos
     videoFiles.forEach(file => {
       const card = document.createElement('div'); card.className = 'video-card';
       card.innerHTML = `<video controls src="videos/${file}"></video><p style="margin-top:8px;">${file}</p>`;
       videosGrid.appendChild(card);
     });
 
-    // ----- TIMELINE ALTERNADA -----
+    // TIMELINE ALTERNADA
     const events = [
       { date: '03/04/2024 19:23', desc: '✨ Nos conocimos · el universo conspiró' },
       { date: '06/05/2024 17:40', desc: '🌿 Nos vimos de nuevo, y supe que era real' },
@@ -453,12 +318,11 @@ Object.keys(imagenes).forEach(tema => {
       tl.appendChild(cont);
     });
 
-    // ----- FUNCIÓN PARA TARJETAS YOUTUBE CON CLICK PARA REPRODUCIR EN SITIO -----
+    // YouTube cards (click para reproducir)
     function createYouTubeCard(title, youtubeUrl) {
       const videoId = youtubeUrl.split('v=')[1]?.split('&')[0] || '';
       if(!videoId) return document.createElement('div');
-      const card = document.createElement('div');
-      card.className = 'yt-card';
+      const card = document.createElement('div'); card.className = 'yt-card';
       const thumb = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
       card.innerHTML = `<img src="${thumb}" class="yt-thumb" alt="${title}"><strong>${title}</strong>`;
       let playerInserted = false;
@@ -475,39 +339,26 @@ Object.keys(imagenes).forEach(tema => {
       return card;
     }
 
-    // Películas
+    // Películas (URL corregida)
     const peliGrid = document.getElementById('peliculasGrid');
-    peliGrid.appendChild(createYouTubeCard('Si la vida de da Mandarinas', 'https://www.youtube.com/watch?v=ShDaILMdRa4
-')); // Cambia URL
-    peliGrid.appendChild(createYouTubeCard('Hasta que el cielo nos reuna', 'https://www.youtube.com/watch?v=Jdl0pAuO1tM'));
+    peliGrid.appendChild(createYouTubeCard('Si la vida te da mandarinas', 'https://www.youtube.com/watch?v=ShDaILMdRa4'));
+    peliGrid.appendChild(createYouTubeCard('Hasta que el cielo nos reúna', 'https://www.youtube.com/watch?v=Jdl0pAuO1tM'));
     peliGrid.appendChild(createYouTubeCard('TinkerBell', 'https://www.youtube.com/watch?v=D7V6g7ws3Oc'));
 
     // Canciones
-   const cancionesGrid = document.getElementById('cancionesGrid');
-
-cancionesGrid.appendChild(createYouTubeCard('Perfect - Ed Sheeran', 'https://www.youtube.com/watch?v=2Vv-BfVoq4g'));
-
-cancionesGrid.appendChild(createYouTubeCard('Amor eterno', 'https://www.youtube.com/watch?v=TKXafcpKp1c'));
-
-cancionesGrid.appendChild(createYouTubeCard('Canción romántica 1', 'https://www.youtube.com/watch?v=b3GyAtcoogc'));
-
-cancionesGrid.appendChild(createYouTubeCard('Canción romántica 2', 'https://www.youtube.com/watch?v=zLX_GcXt2pI'));
-
-cancionesGrid.appendChild(createYouTubeCard('Canción romántica 3', 'https://www.youtube.com/watch?v=LoBOGl1GAG4'));
-
-cancionesGrid.appendChild(createYouTubeCard('Canción romántica 4', 'https://www.youtube.com/watch?v=8N-DvRAspzo'));
-
-cancionesGrid.appendChild(createYouTubeCard('Perfect (Acoustic)', 'https://www.youtube.com/watch?v=2Vv-BfVoq4g'));
-
-cancionesGrid.appendChild(createYouTubeCard('Canción romántica 5', 'https://www.youtube.com/watch?v=p1JmzB6E-C8'));
-
-cancionesGrid.appendChild(createYouTubeCard('Canción romántica 6', 'https://www.youtube.com/watch?v=kz8JJxxD4-E'));
-
-cancionesGrid.appendChild(createYouTubeCard('Canción romántica 7', 'https://www.youtube.com/watch?v=p2h2FFr08Kg'));
-
-cancionesGrid.appendChild(createYouTubeCard('Canción romántica 8', 'https://www.youtube.com/watch?v=nvGzoSZutYk'));
-
-cancionesGrid.appendChild(createYouTubeCard('Canción romántica 9', 'https://www.youtube.com/watch?v=p4-EgFXfDkc'));
+    const cancionesGrid = document.getElementById('cancionesGrid');
+    cancionesGrid.appendChild(createYouTubeCard('Perfect - Ed Sheeran', 'https://www.youtube.com/watch?v=2Vv-BfVoq4g'));
+    cancionesGrid.appendChild(createYouTubeCard('Amor eterno', 'https://www.youtube.com/watch?v=TKXafcpKp1c'));
+    cancionesGrid.appendChild(createYouTubeCard('Canción romántica 1', 'https://www.youtube.com/watch?v=b3GyAtcoogc'));
+    cancionesGrid.appendChild(createYouTubeCard('Canción romántica 2', 'https://www.youtube.com/watch?v=zLX_GcXt2pI'));
+    cancionesGrid.appendChild(createYouTubeCard('Canción romántica 3', 'https://www.youtube.com/watch?v=LoBOGl1GAG4'));
+    cancionesGrid.appendChild(createYouTubeCard('Canción romántica 4', 'https://www.youtube.com/watch?v=8N-DvRAspzo'));
+    cancionesGrid.appendChild(createYouTubeCard('Perfect (Acoustic)', 'https://www.youtube.com/watch?v=2Vv-BfVoq4g'));
+    cancionesGrid.appendChild(createYouTubeCard('Canción romántica 5', 'https://www.youtube.com/watch?v=p1JmzB6E-C8'));
+    cancionesGrid.appendChild(createYouTubeCard('Canción romántica 6', 'https://www.youtube.com/watch?v=kz8JJxxD4-E'));
+    cancionesGrid.appendChild(createYouTubeCard('Canción romántica 7', 'https://www.youtube.com/watch?v=p2h2FFr08Kg'));
+    cancionesGrid.appendChild(createYouTubeCard('Canción romántica 8', 'https://www.youtube.com/watch?v=nvGzoSZutYk'));
+    cancionesGrid.appendChild(createYouTubeCard('Canción romántica 9', 'https://www.youtube.com/watch?v=p4-EgFXfDkc'));
 
     // Tutorial
     const tutCont = document.getElementById('tutorialContainer');
@@ -515,7 +366,7 @@ cancionesGrid.appendChild(createYouTubeCard('Canción romántica 9', 'https://ww
     const tutCard = createYouTubeCard('Los 5 lenguajes del amor', 'https://www.youtube.com/watch?v=QF7lVq5JlKI');
     tutCont.appendChild(tutCard);
 
-    // Lugares con imagen
+    // Lugares
     const lugares = [
       { nombre: 'Playa de Boa Viagem', img: 'images/boa-viagem.jpg' },
       { nombre: 'São Paulo', img: 'images/saopaulo.jpg' },
@@ -529,17 +380,62 @@ cancionesGrid.appendChild(createYouTubeCard('Canción romántica 9', 'https://ww
       lugGrid.appendChild(card);
     });
 
-    // Audio y música de fondo
-    let audioCtx=null, isPlaying=false;
-    const playBtn = document.getElementById('customPlayBtn'), statusSpan = document.getElementById('audioStatus');
-    playBtn.onclick = async () => { /* simplificado */ };
-    const musicaFondo = new Audio('musica/fondo-romantico.mp3'); musicaFondo.loop = true;
+    // ----- AUDIO OCULTO (melodía sintetizada) -----
+    let audioCtx = null;
+    let isPlaying = false;
+    const playBtn = document.getElementById('customPlayBtn');
+    const statusSpan = document.getElementById('audioStatus');
+    function playGentleMelody(ctx) {
+      const now = ctx.currentTime;
+      const notes = [523.25, 659.25, 783.99, 1046.50];
+      notes.forEach((freq, i) => {
+        let osc = ctx.createOscillator();
+        let gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.08, now + i*0.5);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + i*0.5 + 1.2);
+        osc.connect(gain).connect(ctx.destination);
+        osc.start(now + i*0.6);
+        osc.stop(now + i*0.6 + 1.5);
+      });
+      setTimeout(() => {
+        if (audioCtx && isPlaying) { playGentleMelody(audioCtx); }
+        else { isPlaying = false; playBtn.innerHTML = '<i class="fas fa-play"></i>'; statusSpan.textContent = '🎵 listo'; }
+      }, 4000);
+    }
+    playBtn.addEventListener('click', async () => {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') await audioCtx.resume();
+      if (!isPlaying) {
+        isPlaying = true;
+        playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        statusSpan.textContent = '🎶 reproduciendo...';
+        playGentleMelody(audioCtx);
+      } else {
+        await audioCtx.close();
+        audioCtx = null;
+        isPlaying = false;
+        playBtn.innerHTML = '<i class="fas fa-play"></i>';
+        statusSpan.textContent = '🎵 detenido';
+      }
+    });
+
+    // Música de fondo (archivo local)
+    const musicaFondo = new Audio('musica/fondo-romantico.mp3');
+    musicaFondo.loop = true;
     let fondoPlaying = false;
-    document.getElementById('musicToggle').onclick = () => {
-      if(!fondoPlaying) { musicaFondo.play(); musicToggle.innerHTML = '<i class="fas fa-pause"></i> Pausar música'; }
-      else { musicaFondo.pause(); musicToggle.innerHTML = '<i class="fas fa-music"></i> Nuestra Música'; }
+    const musicToggleBtn = document.getElementById('musicToggle');
+    musicToggleBtn.addEventListener('click', () => {
+      if (!fondoPlaying) {
+        musicaFondo.play().catch(e => console.log('Esperando interacción'));
+        musicToggleBtn.innerHTML = '<i class="fas fa-pause"></i> Pausar música';
+      } else {
+        musicaFondo.pause();
+        musicToggleBtn.innerHTML = '<i class="fas fa-music"></i> Nuestra Música';
+      }
       fondoPlaying = !fondoPlaying;
-    };
+    });
 
     // Fade scroll + navegación suave
     const observer = new IntersectionObserver((e) => e.forEach(en => { if(en.isIntersecting) en.target.classList.add('visible'); }), {threshold:0.15});
