@@ -319,7 +319,7 @@
       <span>Bienvenida al lugar donde guardo todo lo que siento por ti…</span>
     </div>
     <div style="text-align:center; margin:20px 0;">
-      <button id="musicToggle" class="play-btn" style="width:auto; padding:0.8rem 2rem; border-radius:40px; background:#ffb6c1; color:#4a2c3a;"><i class="fas fa-music"></i> Música suave</button>
+      <button id="musicToggle" class="play-btn" style="width:auto; padding:0.8rem 2rem; border-radius:40px; background:#ffb6c1; color:#4a2c3a;"><i class="fas fa-music"></i> Nuestra Música</button>
       <p style="margin-top:5px; font-size:0.9rem;">(toca para activar melodía)</p>
     </div>
   </section>
@@ -596,16 +596,24 @@
         statusSpan.textContent = '🎵 detenido';
       }
     });
-    document.getElementById('musicToggle').addEventListener('click', ()=>{
-      if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      if(audioCtx.state==='suspended') audioCtx.resume();
-      if(!isPlaying){
-        isPlaying=true;
-        playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-        statusSpan.textContent='🎶 sonando...';
-        playGentleMelody(audioCtx);
-      }
-    });
+// MÚSICA DE FONDO (botón "Música suave")
+const musicaFondo = new Audio('musica/fondo-romantico.mp3');  // <-- cambia la ruta
+musicaFondo.loop = true;  // para que se repita
+
+let fondoPlaying = false;
+const musicToggleBtn = document.getElementById('musicToggle');
+
+musicToggleBtn.addEventListener('click', () => {
+  if (!fondoPlaying) {
+    musicaFondo.play();
+    musicToggleBtn.innerHTML = '<i class="fas fa-pause"></i> Pausar música';
+    fondoPlaying = true;
+  } else {
+    musicaFondo.pause();
+    musicToggleBtn.innerHTML = '<i class="fas fa-music"></i> Música suave';
+    fondoPlaying = false;
+  }
+});
 
     // TIMELINE
     const events = [
